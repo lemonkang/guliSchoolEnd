@@ -1,8 +1,6 @@
 package com.atguigu.eduservice.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,7 +17,9 @@ public class EduTeacher {
     private  Integer sort;
     @TableLogic
     private Integer is_deleted;
+    @TableField(fill = FieldFill.INSERT)
     private Date gmt_create;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmt_modified;
 
 }
