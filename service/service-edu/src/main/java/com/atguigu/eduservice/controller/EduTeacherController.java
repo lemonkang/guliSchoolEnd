@@ -2,6 +2,7 @@ package com.atguigu.eduservice.controller;
 
 import com.atguigu.commonutils.R;
 import com.atguigu.eduservice.entity.EduTeacher;
+import com.atguigu.eduservice.entity.object.InsertEduTeacher;
 import com.atguigu.eduservice.entity.object.PageQuery;
 import com.atguigu.eduservice.entity.object.PageQueryWrapper;
 import com.atguigu.eduservice.service.EduTeacherService;
@@ -90,7 +91,7 @@ public class EduTeacherController {
     @PostMapping("insertEduTeacher")
     public  R inserEduTeacher(
             @ApiParam("新增教师")
-            @RequestBody EduTeacher eduTeacher
+            @RequestBody InsertEduTeacher eduTeacher
     ){
         EduTeacher eduTeacher1 = new EduTeacher();
         eduTeacher.setName(eduTeacher.getName());
@@ -103,6 +104,5 @@ public class EduTeacherController {
     @GetMapping("error")
     public void error(){
         int a=1/0;
-
     }
 }
