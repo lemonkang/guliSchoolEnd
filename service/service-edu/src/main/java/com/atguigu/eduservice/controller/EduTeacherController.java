@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.List;
 
 @Api("教师管理模块")
-@CrossOrigin
 @RestController
 @RequestMapping("/eduservice/teacher")
 public class EduTeacherController {
