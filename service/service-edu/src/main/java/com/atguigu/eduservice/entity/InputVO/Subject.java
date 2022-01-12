@@ -1,4 +1,4 @@
-package com.atguigu.eduservice.entity.object;
+package com.atguigu.eduservice.entity.InputVO;
 
 import lombok.Data;
 

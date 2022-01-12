@@ -1,7 +1,7 @@
 package com.atguigu.eduservice.service;
 
 import com.atguigu.eduservice.entity.EduSubject;
-import com.atguigu.eduservice.entity.object.AllSubjectList;
+import com.atguigu.eduservice.entity.InputVO.AllSubjectList;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
 

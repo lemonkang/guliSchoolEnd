@@ -2,9 +2,9 @@ package com.atguigu.eduservice.controller;
 
 import com.atguigu.commonutils.R;
 import com.atguigu.eduservice.entity.EduTeacher;
-import com.atguigu.eduservice.entity.object.InsertEduTeacher;
-import com.atguigu.eduservice.entity.object.PageQuery;
-import com.atguigu.eduservice.entity.object.PageQueryWrapper;
+import com.atguigu.eduservice.entity.InputVO.InsertEduTeacher;
+import com.atguigu.eduservice.entity.InputVO.PageQuery;
+import com.atguigu.eduservice.entity.InputVO.PageQueryWrapper;
 import com.atguigu.eduservice.service.EduTeacherService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
