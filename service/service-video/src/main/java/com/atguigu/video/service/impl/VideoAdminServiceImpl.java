@@ -5,8 +5,7 @@ import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.vod.model.v20170321.CreateUploadVideoRequest;
-import com.aliyuncs.vod.model.v20170321.CreateUploadVideoResponse;
+import com.aliyuncs.vod.model.v20170321.*;
 import com.atguigu.video.constant.ConstantPropertiesUtil;
 import com.atguigu.video.service.VideoAdminService;
 import com.atguigu.video.utils.AliyunVodSDKUtils;
@@ -15,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @Service
 public class VideoAdminServiceImpl implements VideoAdminService {
@@ -46,4 +46,78 @@ public class VideoAdminServiceImpl implements VideoAdminService {
 //
 
     }
+
+//根据视频id删除视频   删除true  未删除false
+    @Override
+    public Boolean deleteVideo(String id) {
+        try {
+            DefaultAcsClient client = AliyunVodSDKUtils.initVodClient(ConstantPropertiesUtil.Access_Key_Id, ConstantPropertiesUtil.Access_Key_Secret);
+            DeleteVideoResponse response = new DeleteVideoResponse();
+            try {
+                response = AliyunVodSDKUtils.infoVideo(client, id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String requestId = response.getRequestId();
+            if (requestId==null || requestId.isEmpty()){
+                return false;
+
+            }
+
+            System.out.println("删除的视频id"+response.getRequestId());
+
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    @Override
+    public String getvideo(String id) {
+        String videourl=null;
+        DefaultAcsClient client = null;
+        try {
+            client = AliyunVodSDKUtils.initVodClient(ConstantPropertiesUtil.Access_Key_Id, ConstantPropertiesUtil.Access_Key_Secret);
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+        GetPlayInfoResponse response = new GetPlayInfoResponse();
+        try {
+            response = AliyunVodSDKUtils.getPlayInfo(client,id);
+            List<GetPlayInfoResponse.PlayInfo> playInfoList = response.getPlayInfoList();
+            //播放地址
+            for (GetPlayInfoResponse.PlayInfo playInfo : playInfoList) {
+                System.out.print("PlayInfo.PlayURL = " + playInfo.getPlayURL() + "\n");
+                videourl= playInfo.getPlayURL();
+            }
+        } catch (Exception e) {
+            System.out.print("ErrorMessage = " + e.getLocalizedMessage());
+        }
+        System.out.print("RequestId = " + response.getRequestId() + "\n");
+        return videourl;
+    }
+//    根据id获取视频的播放凭证
+    @Override
+    public String getVideoPlayAuth(String videoid) {
+        String auth=null;
+        DefaultAcsClient client = null;
+        try {
+            client = AliyunVodSDKUtils.initVodClient(ConstantPropertiesUtil.Access_Key_Id, ConstantPropertiesUtil.Access_Key_Secret);
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+        GetVideoPlayAuthResponse response = new GetVideoPlayAuthResponse();
+        try {
+            response = AliyunVodSDKUtils.getVideoPlayAuth(client,videoid);
+            //播放凭证
+            auth=response.getPlayAuth();
+
+        } catch (Exception e) {
+            System.out.print("ErrorMessage = " + e.getLocalizedMessage());
+        }
+
+        return auth;
+    }
+
 }
