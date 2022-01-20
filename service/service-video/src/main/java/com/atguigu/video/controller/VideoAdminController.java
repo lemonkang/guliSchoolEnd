@@ -29,9 +29,9 @@ public class VideoAdminController {
     @DeleteMapping("deletevideo")
     public R deleteVideo(
             @ApiParam("删除视频的id")
-            @RequestBody VideoID videoID){
-        String id= videoID.getId();
-       Boolean bool= videoAdminService.deleteVideo(id);
+            @RequestParam("videoID") String videoID){
+
+       Boolean bool= videoAdminService.deleteVideo(videoID);
 
         return R.ok().data("boolean",bool);
     }
@@ -51,7 +51,7 @@ public class VideoAdminController {
             @ApiParam("根据id获取视频的播放凭证")
             @RequestParam("videoid") String videoid
       ){
-    String auth=    videoAdminService.getVideoPlayAuth(videoid);
+    String auth= videoAdminService.getVideoPlayAuth(videoid);
 
         return R.ok().data("auth",auth);
       }

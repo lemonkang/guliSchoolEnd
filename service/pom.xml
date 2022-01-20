@@ -12,9 +12,9 @@
     <modules>
         <module>service-edu</module>
         <module>service-oss</module>
-        <module>service-vod</module>
-        <module>service-vod</module>
         <module>service-video</module>
+
+
     </modules>
     <artifactId>service</artifactId>
     <dependencies>
@@ -29,33 +29,33 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-
-        <!--<dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--Spring Cloud start-->
+ <!--       <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>-->
 
         <!--hystrix依赖，主要是用  @HystrixCommand -->
-        <!--<dependency>
+   <!--     <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>-->
 
         <!--服务注册-->
-        <!-- <dependency>
-             <groupId>org.springframework.cloud</groupId>
-             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-         </dependency>-->
-        <!--服务调用-->
-        <!-- <dependency>
-             <groupId>org.springframework.cloud</groupId>
-             <artifactId>spring-cloud-starter-openfeign</artifactId>
-         </dependency>-->
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+        <!--服务调用-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--Spring Cloud end-->
 
         <!--mybatis-plus-->
         <dependency>
