@@ -18,7 +18,12 @@ public class EduVideoController {
     @DeleteMapping("deleteVideo")
     public R  deleteVideo(@RequestParam("videoId") String videoId ){
        Boolean bool= eduVideoService.deleteVideo(videoId);
-        return R.ok();
+       if (bool){
+           return R.ok();
+       }else {
+           return R.fail();
+       }
+
     }
     @ApiOperation("根据课程id删除小节")
     @DeleteMapping("deleteVideoByCourseId")

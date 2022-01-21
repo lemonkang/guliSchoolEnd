@@ -30,7 +30,10 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper,EduVideo> im
 //           获取视频id
         String videoID = eduVideo.getVideoSourceId();
 
-        vodClient.deleteVideo("8dd7a06641ab4811b31ddce1bb74feb4");
+        R r = vodClient.deleteVideo("videoID");
+        if (r.getCode()==2001){
+            return false;
+        }
         int delete = baseMapper.delete(eduVideoQueryWrapper);
 
         return  delete==1;

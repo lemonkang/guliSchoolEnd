@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
-@FeignClient("service-vod")
+@FeignClient(name = "service-vod",fallback = VodFileDegradeFeignClient.class)
+//@FeignClient("service-vod")
 @Component
 public interface VodClient {
     @DeleteMapping("/admin/vod/video/deletevideo")
