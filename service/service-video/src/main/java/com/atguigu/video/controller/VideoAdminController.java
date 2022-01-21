@@ -6,9 +6,13 @@ import com.atguigu.video.vo.controller.VideoID;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
 
 @RestController
 @Api("阿里云的视频点播")
@@ -51,9 +55,18 @@ public class VideoAdminController {
             @ApiParam("根据id获取视频的播放凭证")
             @RequestParam("videoid") String videoid
       ){
-    String auth= videoAdminService.getVideoPlayAuth(videoid);
-
+      String auth= videoAdminService.getVideoPlayAuth(videoid);
         return R.ok().data("auth",auth);
       }
+//      根据课程id删除多条视频
+    @ApiOperation("根据课程id删除多条视频")
+    @DeleteMapping("deleteVideoByCourseId")
+    public R deleteVideoByCourseId(@RequestParam("sourceIdStrings")ArrayList<String> sourceIdStrings){
+        String join = StringUtils.join(sourceIdStrings,",");
+        Boolean bool= videoAdminService.deleteVideo(join);
+        return R.ok().data("boolean",bool);
+    }
+
+
 
 }

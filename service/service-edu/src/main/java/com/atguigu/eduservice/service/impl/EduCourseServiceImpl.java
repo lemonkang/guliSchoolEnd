@@ -1,12 +1,15 @@
 package com.atguigu.eduservice.service.impl;
 
+import com.atguigu.eduservice.entity.EduChapter;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduCourseDescription;
 import com.atguigu.eduservice.entity.InputVO.CourseInfo;
 import com.atguigu.eduservice.entity.outputVO.CoursePublishVo;
 import com.atguigu.eduservice.mapper.EduCourseMapper;
+import com.atguigu.eduservice.service.EduChapterService;
 import com.atguigu.eduservice.service.EduCourseDescriptionService;
 import com.atguigu.eduservice.service.EduCourseService;
+import com.atguigu.eduservice.service.EduVideoService;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -25,6 +28,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper,EduCourse>
 //    引入educoursedescriptionservice对educoursedescription表进行修改
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
+    @Autowired
+    private EduChapterService eduChapterService;
+    @Autowired
+    private EduVideoService eduVideoService;
     @Override
     public void insertCourseInfo(CourseInfo courseInfo) {
         EduCourse eduCourse = new EduCourse();
@@ -50,5 +57,14 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper,EduCourse>
     public CoursePublishVo getPublishCourseInfo(String courseid) {
         CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(courseid);
         return publishCourseInfo;
+    }
+//根据课程id删除课程章节小节以及课程描述
+    @Override
+    public Boolean deleteCourseById(String courseid) {
+        Boolean aBoolean = eduVideoService.deleteVideoByCourseId(courseid);
+        Boolean aBoolean1 = eduChapterService.deleteChapterByCourseid(courseid);
+        eduCourseDescriptionService.ByCourseid(courseid);
+        boolean b = this.removeById(courseid);
+        return b;
     }
 }

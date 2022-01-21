@@ -5,4 +5,5 @@ import com.atguigu.eduservice.mapper.EduCourseDescriptionMapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface EduCourseDescriptionService extends IService<EduCourseDescription> {
+    void ByCourseid(String courseid);
 }

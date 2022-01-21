@@ -33,4 +33,10 @@ public class EduCourseController {
       CoursePublishVo coursePublishVo= eduCourseService.getPublishCourseInfo(courseid);
         return R.ok().data("coursePublishVo",coursePublishVo);
     }
+    @ApiOperation("根据课程id删除课程，章节，小节，课程描述")
+    @DeleteMapping("deleteCourseById")
+    public R deleteCourseById(@RequestParam("courseid") String courseid){
+      Boolean bool=  eduCourseService.deleteCourseById(courseid);
+        return R.ok().data("bool",bool);
+    }
 }

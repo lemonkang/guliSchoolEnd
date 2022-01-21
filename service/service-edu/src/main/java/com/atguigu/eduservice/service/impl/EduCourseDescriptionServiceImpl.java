@@ -11,4 +11,8 @@ import java.util.List;
 @Service
 public class EduCourseDescriptionServiceImpl extends ServiceImpl<EduCourseDescriptionMapper,EduCourseDescription> implements EduCourseDescriptionService {
 
+    @Override
+    public void ByCourseid(String courseid) {
+        this.removeById(courseid);
+    }
 }
