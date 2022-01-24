@@ -13,6 +13,7 @@
         <module>service-edu</module>
         <module>service-oss</module>
         <module>service-video</module>
+        <module>service-msm</module>
 
 
     </modules>
