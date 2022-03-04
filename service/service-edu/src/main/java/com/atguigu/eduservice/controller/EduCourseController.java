@@ -4,6 +4,7 @@ import com.atguigu.commonutils.R;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.InputVO.CourseInfo;
 import com.atguigu.eduservice.entity.outputVO.CoursePublishVo;
+import com.atguigu.eduservice.entity.outputVO.EduCourseInfo;
 import com.atguigu.eduservice.service.EduCourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,10 +12,12 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/eduservice/course")
 @Api("课程管理")
-@CrossOrigin
+
 public class EduCourseController {
 
     @Autowired
@@ -38,5 +41,11 @@ public class EduCourseController {
     public R deleteCourseById(@RequestParam("courseid") String courseid){
       Boolean bool=  eduCourseService.deleteCourseById(courseid);
         return R.ok().data("bool",bool);
+    }
+    @ApiOperation("获取课程的全部信息")
+    @GetMapping("getAllCourseInfo")
+    public R getAllCourseInfo(){
+      ArrayList<EduCourseInfo> EduCourseInfolist=  eduCourseService.getAllCourseInfo();
+        return R.ok().data("EduCourseInfolist",EduCourseInfolist);
     }
 }
